@@ -1,0 +1,13 @@
+<p id="toggleText">このテキストの表示を切り替えます。</p>
+<button onclick="toggleVisibility();">表示/非表示</button>
+
+<script>
+function toggleVisibility() {
+    let element = document.getElementById('toggleText');
+    if (element.style.display === 'none') {
+        element.style.display = 'block';
+    } else {
+        element.style.display = 'none';
+    }
+}
+</script>

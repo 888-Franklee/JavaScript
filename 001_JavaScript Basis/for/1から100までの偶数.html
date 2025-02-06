@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let sum = 0
+        let finalValue
+
+        for(let i = 1; i <= 100 ; i++){
+            if(i % 2 === 0){
+                sum += i
+            }
+            
+            finalValue = i
+        }
+        document.write(`${sum} です！`)
+        document.write(`<br>最終的な i の値は: ${finalValue}`)
+        console.log(finalValue)
+        
+    </script>
+    <!-- let で宣言された変数はブロックスコープに限定されるため、ループ外でその変数にアクセスすることができません。
+         i をループ外で使いたい場合は、i を var で宣言するか、別の変数に i の最終値を保存する方法を使いましょう。 -->
+</body>
+</html>

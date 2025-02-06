@@ -1,0 +1,16 @@
+<label for="name">名前:</label>
+<input type="text" id="name">
+<label for="name1">氏名:</label>
+<input type="text" id="name1">
+<button onclick="showName();">名前を表示</button>
+
+<script>
+function showName() {
+    let name = document.getElementById('name').value;
+    console.log('名前: ' + name);
+
+    let name1 = document.getElementById('name1').value;
+    console.log('氏名: ' + name1);
+}
+</script>
+

@@ -1,0 +1,13 @@
+<select id="fruits">
+    <option>りんご</option>
+    <option>バナナ</option>
+    <option>オレンジ</option>
+</select>
+<button onclick="showSelectedFruit();">選択した果物を表示</button>
+
+<script>
+function showSelectedFruit() {
+    let fruit = document.getElementById('fruits').value;
+    console.log('選択した果物: ' + fruit);
+}
+</script>

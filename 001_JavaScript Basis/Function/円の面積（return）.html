@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function calculateCircleArea(radius) {
+        if (radius <= 0) {
+        return "半径必须是正数" //return必须放最后
+    }
+        const area = Math.PI * Math.pow(radius, 2)
+        return `半径为 ${radius} 的圆的面积是 ${area.toFixed(2)}`
+    }
+
+    const radius = 8
+    console.log(calculateCircleArea(radius)) 
+    </script>
+</body>
+</html>

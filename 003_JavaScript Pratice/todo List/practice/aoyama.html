@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>getElementByIdのサンプル</title>
+<style>
+    p{
+        font-size: 30px;  
+    }
+    div{
+        width: 800px;
+        text-align: center;
+        background-color: rgb(174, 173, 235);
+        margin: 0 auto;/*用于水平居中块级元素*/
+    }
+    button{
+        font-size: 30px;
+        background-color: blueviolet;
+    }
+    .place-out{
+        color:rgb(181, 36, 99);
+        font-size: 30px;   
+    }
+    .shopname-out{
+        color: blueviolet;
+        font-size: 30px;  
+    }
+</style>
+</head>
+<body>
+    <div>
+        <p>今日は外でランチを食べました。</p>
+        <p id="place">住所：港区南青山</p>
+        <p id="shopname">店名：リストランテ南青山</p>
+        <p>美味しかったです。</p>
+        <button onClick="getElement();">要素を取得</button>
+        <div id="output"></div> 
+    </div>
+
+<script>
+function getElement(){
+    let placeElement = document.getElementById('place');
+    //参考⇒https://www.javadrive.jp/javascript/string/index8.html
+    let place = placeElement.textContent.substring(3);
+   
+    let shopElement = document.getElementById('shopname');
+    let shopName = shopElement.textContent.slice(3, 11);
+    
+    const outputDiv = document.getElementById('output');
+    //参考⇒HTML要素の中身を変更するときに使われるプロパティである。HTML要素の中身を自由に変更することで、動的なWebページを作成できる。(https://qiita.com/mzmz__02/items/7bcbce347bc3c5d64b93　)
+    outputDiv.innerHTML = `
+        <p class="place-out">場所: ${place}</p>
+        <p class="shopname-out">店名: ${shopName}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,115 @@
+/* 重置默认样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 设置背景和排版 */
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background-color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #7d7de8, #b8b8f3);
+}
+
+/* 容器样式 */
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgb(236, 124, 124);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 8px 30px rgba(8, 186, 28, 0.2);
+}
+
+/* 标题样式 */
+h1 {
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 下拉菜单样式 */
+select {
+    padding: 12px 20px;
+    font-size: 18px;
+    border: 2px solid #d3d3d3;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+select:hover {
+    border-color: #7d7de8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* 皇帝列表样式 */
+#emperors-list {
+    margin-top: 20px;
+    text-align: left;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+#emperors-list ul {
+    list-style-type: none;
+}
+
+#emperors-list li {
+    padding: 8px 0;
+    font-size: 16px;
+    color: #444;
+    border-bottom: 1px solid #eee;
+}
+
+/* 子标题样式 */
+h3 {
+    font-size: 22px;
+    color: #7d7de8;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 20px;
+    color: #5656d8;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* 动画效果 */
+.container, select, #emperors-list {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

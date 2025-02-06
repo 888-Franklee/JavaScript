@@ -1,0 +1,11 @@
+<p id="city">東京</p>
+<p id="country">日本</p>
+<button onclick="displayLocation();">場所を表示</button>
+
+<script>
+function displayLocation() {
+    let city = document.getElementById('city').textContent;
+    let country = document.getElementById('country').textContent;
+    console.log('City: ' + city + ', Country: ' + country);
+}
+</script>

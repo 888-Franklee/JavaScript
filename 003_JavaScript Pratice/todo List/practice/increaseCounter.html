@@ -1,0 +1,9 @@
+<p id="counter">0</p>
+<button onclick="increaseCounter();">カウントアップ</button>
+
+<script>
+function increaseCounter() {
+    let counterElement = document.getElementById('counter');
+    counterElement.textContent = parseInt(counterElement.textContent) + 1;
+}
+</script>

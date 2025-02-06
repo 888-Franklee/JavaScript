@@ -1,0 +1,18 @@
+<p id="para1">この段落は表示されます。</p>
+<p id="para2">この段落は非表示にされます。</p>
+<button onclick="toggleParagraph();">段落を非表示にする</button>
+
+<script>
+function toggleParagraph() {
+    let para2 = document.getElementById('para2');
+    let button = document.querySelector('button');
+    
+    if (para2.style.display === 'none') {
+        para2.style.display = 'block';
+        button.textContent = '段落を非表示にする';
+    } else {
+        para2.style.display = 'none';
+        button.textContent = '段落を再表示する';
+    }
+}
+</script>

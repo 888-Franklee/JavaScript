@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #89acf1, #8d5ad9);
+}
+.container {
+    background: #fffdfd;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    width: 400px;
+    text-align: center;
+}
+h1 {
+    color: #0a0a0a;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s;
+}
+select:focus {
+    border-color: #440975;
+}
+.output {
+    margin-top: 50px;
+    padding: 15px;
+    background: #f7f5f7;
+    border-radius: 8px;
+    border: 1px solid #0b52b5;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 16px;
+    text-align: left;
+    white-space: pre-wrap;
+    color: #0c0a0a;
+}
+.output strong {
+    color: #bc8cec;
+}
+/* 滚动条样式 */
+.output::-webkit-scrollbar {
+    width: 8px;
+}
+.output::-webkit-scrollbar-thumb {
+    background-color: #f9f5f5;
+    border-radius: 4px;
+}
+.output::-webkit-scrollbar-thumb:hover {
+    background-color: #b1adac;
+}

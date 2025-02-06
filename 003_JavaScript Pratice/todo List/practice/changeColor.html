@@ -1,0 +1,67 @@
+<p id="colorTextBlue">青に変更</p>
+<button onclick="changeBlue();">青に変更</button>
+
+<p id="colorTextRed">赤に変更</p>
+<button onclick="changeRed();">赤に変更</button>
+
+<p id="colorTextYellow">黄に変更</p>
+<button onclick="changeYellow();">黄に変更</button>
+
+<script>
+function changeBlue() {
+    const element = document.getElementById('colorTextBlue');
+    if (element.style.color === 'blue') {
+        element.style.color = '';
+    } else {
+        element.style.color = 'blue';
+    }
+}
+//参考⇒https://yujiromx.com/style-color-javascript/
+//「style.color」とは、要素スタイル属性のcolorプロパティの値を取得、もしくは設定するメソッドのことです。文字色を変えたりできます。
+//element.style.color
+
+function changeRed() {
+    const element = document.getElementById('colorTextRed');
+    if (element.style.color === 'red') {
+        element.style.color = '';
+    } else {
+        element.style.color = 'red';
+    }
+}
+
+function changeYellow() {
+    const element = document.getElementById('colorTextYellow');
+    if (element.style.color === 'yellow') {
+        element.style.color = '';
+    } else {
+        element.style.color = 'yellow';
+    }
+}
+
+//在JavaScript中，=== 和 = 有完全不同的用途和含义。
+
+//=== (严格等于操作符):
+// ●用于比较两个值是否严格相等。
+// ●它不仅比较值，还比较值的类型。
+// ●例如，'5' === 5 会返回 false，因为一个是字符串类型，另一个是数字类型。
+// ●在你的代码中，if (element.style.color === 'blue') 使用了 === 来确保 element.style.color 的值不仅为 'blue'，而且其类型也是字符串。
+
+//= (赋值操作符):
+// ●用于给变量或对象的属性赋值。
+// ●例如，let x = 5; 会将数字 5 赋值给变量 x。
+// ●在你的代码中，element.style.color = 'blue'; 和 element.style.color = ''; 使用了 = 来设置 element 的 style.color 属性。
+
+//使用场景
+// ●使用 === 的场景:
+//    ●当你需要比较两个值是否严格相等时。
+//    ●在条件语句（如 if 语句）中，检查变量或属性的值是否等于某个特定值时。
+// ●使用 = 的场景:
+//    ●当你需要给变量或对象的属性赋予一个新值时。
+//    ●在初始化变量或在函数内部修改对象状态时。
+// ●注意事项
+//    ●使用 === 可以避免JavaScript的类型强制转换带来的意外结果。例如，'0' == 0 会返回 true（因为JavaScript会将字符串 '0' 转换为数字 0），但 '0' === 0 会返回 false（因为类型不同）。
+//    ●始终确保在需要比较值时使用 === 或 !==（严格不等于），而在需要赋值时使用 =。
+//    ●希望这能帮助你更好地理解 === 和 = 的使用场景！
+
+</script>
+

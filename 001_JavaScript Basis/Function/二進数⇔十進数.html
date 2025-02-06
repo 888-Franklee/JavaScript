@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function convertNumber() {
+            const input = prompt("请输入一个数（十进制或二进制）:");
+            const type = prompt("请输入转换类型：\n1: 十进制转二进制\n2: 二进制转十进制");
+
+            if (type === "1") {
+                const decimal = parseInt(input, 10);
+                if (isNaN(decimal)) {
+                    console.log("输入无效，请输入一个有效的十进制数。");
+                } else {
+                    const binary = decimal.toString(2); 
+                    console.log(`十进制 ${decimal} 转换为二进制是: ${binary}`);
+                }
+            } else if (type === "2") {
+                const binary = input; 
+                if (!/^[01]+$/.test(binary)) {
+                    console.log("输入无效，请输入一个有效的二进制数。");
+                } else {
+                    const decimal = parseInt(binary, 2); 
+                    console.log(`二进制 ${binary} 转换为十进制是: ${decimal}`);
+                }
+            } else {
+                console.log("无效的选择，请输入 1 或 2。");
+            }
+        }
+
+        convertNumber();
+    </script>
+</body>
+</html>

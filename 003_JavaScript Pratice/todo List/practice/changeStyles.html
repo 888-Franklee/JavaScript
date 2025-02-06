@@ -1,0 +1,21 @@
+<p id="text1">始皇帝</p>
+<p id="text2">唐太宗</p>
+<button onclick="changeStyles();">スタイルを変更</button>
+
+<script>
+function changeStyles() {
+    const text1=document.getElementById('text1');
+    if(text1.style.fontWeight === 'bold'){
+       text1.style.fontWeight = '';
+    } else {
+       text1.style.fontWeight = 'bold'
+    }
+    
+    const text2=document.getElementById('text2');
+    if(text2.style.fontSize==='24px'){
+       text2.style.fontSize = '';
+     }else {
+       text2.style.fontSize= '24px'
+    }
+}
+</script>
