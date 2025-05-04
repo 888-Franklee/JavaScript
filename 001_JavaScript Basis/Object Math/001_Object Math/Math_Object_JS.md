@@ -108,7 +108,7 @@ Math.sign(7);       // 1
 Math.random(); // 0以上1未満の小数（例: 0.3853）
 ```
 
-### ✅ 任意の範囲の整数生成：
+###  任意の範囲の整数生成：
 
 ```javascript
 function getRandomInt(min, max) {
