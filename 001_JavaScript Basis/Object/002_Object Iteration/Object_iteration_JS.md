@@ -21,7 +21,7 @@ for (let key in user) {
 }
 ```
 
-> ⚠️ 注意：`for...in` は継承されたプロパティも含めます。
+ ⚠️ 注意：`for...in` は継承されたプロパティも含めます。
 
 ###  `hasOwnProperty()` との併用
 
