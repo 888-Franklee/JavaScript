@@ -1,10 +1,105 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s ease;
+        }
+
+        .color-box {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: white;
+            margin-bottom: 2rem;
+        }
+
+        .color-name {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            text-transform: uppercase;
+        }
+
+        .color-hex {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
 <body>
+    <div class="color-box">
+        <h1>随机颜色生成器</h1>
+        <div class="color-name" id="colorName">red</div>
+        <div class="color-hex" id="colorHex">#FF0000</div>
+        <button onclick="changeColor()">换一个颜色</button>
+    </div>
+
     <script>
-        let arr = ['red', 'green', 'blue'];
-        let random = Math.floor(Math.random() * arr.length);
-        console.log(arr[random]); // 正确输出随机颜色
+        const colors = [
+            { name: 'red', hex: '#FF0000' },
+            { name: 'green', hex: '#00FF00' },
+            { name: 'blue', hex: '#0000FF' },
+            { name: 'gold', hex: '#FFD700' },
+            { name: 'purple', hex: '#800080' }
+        ];
+
+        const colorName = document.getElementById('colorName');
+        const colorHex = document.getElementById('colorHex');
+
+        function getRandomColor() {
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            return colors[randomIndex];
+        }
+
+        function changeColor() {
+            const newColor = getRandomColor();
+            
+            // 更新界面
+            colorName.textContent = newColor.name;
+            colorHex.textContent = newColor.hex;
+            
+            // 添加动画效果
+            colorName.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                colorName.style.transform = 'scale(1)';
+            }, 200);
+
+            // 改变背景色
+            document.body.style.backgroundColor = newColor.hex + '20'; // 添加透明度
+        }
+
+        // 初始化颜色
+        changeColor();
     </script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 生成随机数函数（修复参数名错误）
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        
+        let random = getRandom(1, 10);
+        console.log("正确答案（调试用）:", random);
+        
+        // 无限循环猜数字
+        while(true) {
+            let input = prompt('请输入1-10之间的数字:');
+            let num = +input; // 转换为数字
+            
+            // 输入验证（处理非数字和越界情况）
+            if(isNaN(num) || num < 1 || num > 10) {
+                alert("请输入有效的1-10之间的数字！");
+                continue;
+            }
+        
+            // 判断逻辑
+            if(num > random) {
+                alert('您猜大了，再试一次！');
+            } else if(num < random) {
+                alert('您猜小了，再试一次！');
+            } else {
+                alert('🎉 猜对啦，真厉害！');
+                break; // 退出循环
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,15 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多语言问候生成器</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #2d3436;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .greeting-display {
+            font-size: 4rem;
+            margin: 2rem 0;
+            color: #2d3436;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .generate-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: #00b894;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-btn:hover {
+            background: #00cec9;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+        }
+
+        .generate-btn:active {
+            transform: scale(0.95);
+        }
+
+        .history {
+            margin-top: 2rem;
+            color: #636e72;
+            font-size: 1.1rem;
+        }
+
+        .flag-container {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap; /* 新增换行属性 */
+        }
+
+        .flag {
+            width: 35px;  /* 稍微缩小尺寸 */
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            flex-shrink: 0; /* 防止缩小 */
+        }
+
+        .flag:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>🌍 多语言问候语</h1>
+        <div class="flag-container">
+            <img src="https://flagcdn.com/cn.svg" class="flag" alt="中文" data-lang="中文">
+            <img src="https://flagcdn.com/gb.svg" class="flag" alt="English" data-lang="English">
+            <img src="https://flagcdn.com/fr.svg" class="flag" alt="Français" data-lang="Français">
+            <img src="https://flagcdn.com/es.svg" class="flag" alt="Español" data-lang="Español">
+            <img src="https://flagcdn.com/it.svg" class="flag" alt="Italiano" data-lang="Italiano">
+            <img src="https://flagcdn.com/jp.svg" class="flag" alt="日本語" data-lang="日本語">
+            <img src="https://flagcdn.com/kr.svg" class="flag" alt="한국어" data-lang="한국어">
+            <img src="https://flagcdn.com/de.svg" class="flag" alt="Deutsch" data-lang="Deutsch">
+            <img src="https://flagcdn.com/ru.svg" class="flag" alt="Русский" data-lang="Русский">
+        </div>
+        <div class="greeting-display animated" id="greetingDisplay"></div>
+        <button class="generate-btn" onclick="generateGreeting()">随机生成</button>
+        <div class="history">历史记录：<span id="history"></span></div>
+    </div>
+
     <script>
-        let greetings = ["你好", "Hello", "Bonjour", "Hola", "Ciao"];
-        let randomIndex = Math.floor(Math.random() * greetings.length);
-        console.log(greetings[randomIndex]);
+        const greetings = {
+            '中文': ['你好', '早上好', '晚上好', '欢迎', '再见'],
+            'English': ['Hello', 'Good morning', 'Good evening', 'Welcome', 'Goodbye'],
+            'Français': ['Bonjour', 'Bonsoir', 'Bienvenue', 'Salut', 'Au revoir'],
+            'Español': ['Hola', 'Buenos días', 'Buenas tardes', 'Bienvenido', 'Adiós'],
+            'Italiano': ['Ciao', 'Buongiorno', 'Buonasera', 'Benvenuto', 'Arrivederci'],
+            '日本語': ['こんにちは', 'おはよう', 'こんばんは', 'ようこそ', 'さようなら'],
+            '한국어': ['안녕하세요', '좋은 아침', '안녕하세요', '환영합니다', '안녕히 가세요'],
+            'Deutsch': ['Hallo', 'Guten Morgen', 'Guten Abend', 'Willkommen', 'Auf Wiedersehen'],
+            'Русский': ['Здравствуйте', 'Доброе утро', 'Добрый вечер', 'Добро пожаловать', 'До свидания']
+        };
+
+        const greetingDisplay = document.getElementById('greetingDisplay');
+        const historySpan = document.getElementById('history');
+        let currentLanguage = '中文';
+        let history = [];
+
+        function getRandomGreeting() {
+            const langGreetings = greetings[currentLanguage];
+            return langGreetings[Math.floor(Math.random() * langGreetings.length)];
+        }
+
+        function updateHistory(greeting) {
+            history.unshift(`[${currentLanguage}] ${greeting}`);
+            if(history.length > 5) history.pop();
+            historySpan.textContent = history.join(' · ');
+        }
+
+        function animateGreeting() {
+            greetingDisplay.classList.remove('animated');
+            void greetingDisplay.offsetWidth;
+            greetingDisplay.classList.add('animated');
+        }
+
+        function generateGreeting() {
+            const newGreeting = getRandomGreeting();
+            greetingDisplay.textContent = newGreeting;
+            updateHistory(newGreeting);
+            animateGreeting();
+        }
+
+        document.querySelectorAll('.flag').forEach(flag => {
+            flag.addEventListener('click', () => {
+                currentLanguage = flag.dataset.lang;
+                generateGreeting();
+            });
+        });
+
+        generateGreeting();
     </script>
 </body>
 </html>

@@ -3,13 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>随机字符生成器</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem 4rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+        }
+
+        .char-display {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #3498db;
+            margin: 1.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .generate-btn {
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52,152,219,0.4);
+        }
+
+        .generate-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: ripple 0.6s ease-out;
+        }
+
+        @keyframes ripple {
+            from {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        .history {
+            margin-top: 2rem;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1 class="title">随机字符生成器</h1>
+        <div class="char-display" id="charDisplay">A</div>
+        <button class="generate-btn" onclick="generateNewChar()">生成新字符</button>
+        <div class="history">已生成字符：<span id="history"></span></div>
+    </div>
+
     <script>
-        let str = "abcdefg";
-        let randomIndex = Math.floor(Math.random() * str.length);
-        console.log(str[randomIndex]);
-    </script> 
+        const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const charDisplay = document.getElementById('charDisplay');
+        const historySpan = document.getElementById('history');
+        let history = [];
+
+        function getRandomChar() {
+            const randomIndex = Math.floor(Math.random() * str.length);
+            return str[randomIndex];
+        }
+
+        function updateHistory(newChar) {
+            history.unshift(newChar);
+            if(history.length > 5) history.pop();
+            historySpan.textContent = history.join(' ← ');
+        }
+
+        function animateChar() {
+            charDisplay.style.transform = 'scale(1.2) rotate(5deg)';
+            setTimeout(() => {
+                charDisplay.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
+        }
+
+        function generateNewChar() {
+            const newChar = getRandomChar();
+            charDisplay.textContent = newChar;
+            updateHistory(newChar);
+            animateChar();
+        }
+
+        // 初始化
+        generateNewChar();
+    </script>
 </body>
 </html>
