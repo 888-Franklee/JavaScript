@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Remover</title>
+    <style>
+        :root {
+            --transition-speed: 0.3s;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .fruit-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            min-height: 120px;
+        }
+
+        .fruit-item {
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: white;
+            position: relative;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            cursor: pointer;
+        }
+
+        .fruit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        /* 水果颜色定义 */
+        .apple { --color: #ff4b2b; }
+        .banana { --color: #ffd700; }
+        .cherry { --color: #c21e56; }
+        .grape { --color: #6c3483; } /* 新增葡萄紫色 */
+
+        [class*="-item"] {
+            background: var(--color);
+            color: white;
+            --shadow-color: rgba(var(--color-rgb), 0.3);
+        }
+
+        [class*="-item"]:hover {
+            box-shadow: 0 8px 20px rgba(var(--color-rgb), 0.5);
+        }
+
+        .removed-fruit {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: #6c757d;
+            min-height: 24px;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .removed-fruit.show {
+            opacity: 1;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .remove-btn {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.3);
+        }
+
+        .remove-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 75, 43, 0.4);
+        }
+
+        @media (max-width: 500px) {
+            .fruit-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fruit Remover</h1>
+        <div class="fruit-list" id="fruitList"></div>
+        <div class="removed-fruit" id="removedFruit"></div>
+        <div class="button-container">
+            <button class="remove-btn" onclick="removeRandomFruit()">Remove Random Fruit</button>
+        </div>
+    </div>
+
+    <script>
+        const fruits = ['apple', 'banana', 'cherry', 'grape']; // 替换 date 为 grape
+        const fruitList = document.getElementById('fruitList');
+        const removedFruit = document.getElementById('removedFruit');
+
+        const fruitColors = {
+            apple: '#ff4b2b',
+            banana: '#ffd700',
+            cherry: '#c21e56',
+            grape: '#6c3483' // 新增葡萄颜色
+        };
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? [
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            ].join(',') : null;
+        }
+
+        function renderFruits() {
+            fruitList.innerHTML = '';
+            fruits.forEach(fruit => {
+                const div = document.createElement('div');
+                div.className = `${fruit}-item fruit-item`;
+                div.textContent = fruit;
+                div.style.setProperty('--color', fruitColors[fruit]);
+                div.style.setProperty('--color-rgb', hexToRgb(fruitColors[fruit]));
+                fruitList.appendChild(div);
+            });
+        }
+
+        function removeRandomFruit() {
+            if (fruits.length === 0) return;
+            
+            let randomIndex = Math.floor(Math.random() * fruits.length);
+            let removed = fruits.splice(randomIndex, 1);
+            
+            // 显示被移除的水果
+            removedFruit.textContent = `Removed: ${removed[0]}`;
+            removedFruit.classList.remove('show');
+            
+            // 触发重排以重新播放动画
+            void removedFruit.offsetWidth;
+            removedFruit.classList.add('show');
+            
+            // 更新水果列表
+            renderFruits();
+        }
+
+        // 初始化渲染
+        renderFruits();
+    </script>
+</body>
+</html>
