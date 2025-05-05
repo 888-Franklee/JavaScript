@@ -3,15 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Fruit Remover</title>
+    <style>
+        /* ... 保持原有CSS不变 ... */
+        
+        .fruit-item {
+            background: #f1f3f5; /* 默认颜色 */
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #495057;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        /* 新增颜色覆盖规则 */
+        .apple { --color: #ff4b2b; }
+        .banana { --color: #ffd700; }
+        .cherry { --color: #c21e56; }
+        .date { --color: #a020f0; }
+        
+        [class*="-item"] {
+            background: var(--color);
+            color: white;
+            box-shadow: 0 2px 5px rgba(var(--color-rgb), 0.3);
+        }
+        
+        [class*="-item"]:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(var(--color-rgb), 0.5);
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Fruit Remover</h1>
+        <div class="fruit-list" id="fruitList"></div>
+        <div class="removed-fruit" id="removedFruit"></div>
+        <div class="button-container">
+            <button class="remove-btn" onclick="removeRandomFruit()">Remove Random Fruit</button>
+        </div>
+    </div>
+
     <script>
-        let fruits = ['apple', 'banana', 'cherry', 'date'];
-        let randomIndex = Math.floor(Math.random() * fruits.length);
-        let removed = fruits.splice(randomIndex, 1);
-        console.log("Removed:", removed[0]);
-        console.log("Remaining:", fruits);
+        const fruitColors = {
+            apple: '#ff4b2b', // 红色
+            banana: '#ffd700', // 黄色
+            cherry: '#c21e56', // 深红
+            date: '#a020f0'   // 紫色
+        };
+
+        function renderFruits() {
+            fruitList.innerHTML = '';
+            fruits.forEach(fruit => {
+                const div = document.createElement('div');
+                div.className = `${fruit}-item fruit-item`;
+                div.textContent = fruit;
+                div.style.setProperty('--color', fruitColors[fruit]);
+                div.style.setProperty('--color-rgb', hexToRgb(fruitColors[fruit]));
+                fruitList.appendChild(div);
+            });
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? [
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            ] : null;
+        }
+
+        // 其他JS代码保持不变...
     </script>
 </body>
 </html>
