@@ -2,13 +2,13 @@
 
 ### setTimeout() は、指定した時間が経過した後に一度だけ関数を実行するためのJavaScriptのメソッドです。非同期処理を扱う際に便利で、タイマーのような動作をします。
 
-## 簡単なタイマー
+## 1.簡単なタイマー
 ```
 setTimeout(() => {
   console.log('2秒後に表示されます');
 }, 2000);
 ```
-## 関数に引数を渡す
+## 2.関数に引数を渡す
 ```
 function greet(name) {
   console.log(`こんにちは、${name}さん！`);
@@ -16,7 +16,7 @@ function greet(name) {
 
 setTimeout(greet, 3000, '太郎');
 ```
-## タイマーをキャンセルする
+## 3.タイマーをキャンセルする
 ```
 const timerId = setTimeout(() => {
   console.log('このメッセージは表示されません');
@@ -25,7 +25,7 @@ const timerId = setTimeout(() => {
 clearTimeout(timerId);
 console.log('タイマーがキャンセルされました');
 ```
-## ローディングメッセージ
+## 4.ローディングメッセージ
 ```
 console.log('ローディング中...');
 
@@ -34,7 +34,7 @@ setTimeout(() => {
 }, 3000);
 ```
 
-## 注意点
+## 5.注意点
 ### setTimeout() は非同期関数です。タイマーの遅延時間がゼロでも、次のコードが先に実行されます。
 ```
 console.log('A');
