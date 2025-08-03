@@ -5,7 +5,7 @@ JavaScriptでは、オブジェクトの**プロパティ（キーと値）を�
 このガイドでは、さまざまな方法を例付きで詳細に解説します。
 
 ---
-## ✅ `for...in` ループ
+## 1.`for...in` ループ
 
 `for...in` は、オブジェクトの**列挙可能なすべてのプロパティのキー**を取得します。
 
@@ -35,7 +35,7 @@ for (let key in user) {
 
 ---
 
-## ✅ `Object.keys()` + `forEach`
+## 2. `Object.keys()` + `forEach`
 
 `Object.keys(obj)` は、自身が持つ**キーの配列**を返します。
 
@@ -47,7 +47,7 @@ Object.keys(user).forEach(key => {
 
 ---
 
-## ✅ `Object.values()`
+## 3. `Object.values()`
 
 `Object.values(obj)` は、オブジェクトの**すべての値の配列**を返します。
 
@@ -58,7 +58,7 @@ console.log(values); // ["田中", 30, true]
 
 ---
 
-## ✅ `Object.entries()` + `for...of`
+## 4. `Object.entries()` + `for...of`
 
 `Object.entries(obj)` は `[キー, 値]` の配列を返すため、`for...of` と非常に相性が良いです。
 
@@ -70,7 +70,7 @@ for (const [key, value] of Object.entries(user)) {
 
 ---
 
-## ✅ 配列の中のオブジェクトに対する `forEach()`
+## 5. 配列の中のオブジェクトに対する `forEach()`
 
 ```javascript
 const users = [
@@ -85,7 +85,7 @@ users.forEach(user => {
 
 ---
 
-## ✅ `for...of` はオブジェクト単体には使えない
+## 6. `for...of` はオブジェクト単体には使えない
 
 ```javascript
 const obj = { a: 1, b: 2 };
@@ -105,7 +105,7 @@ for (const [key, val] of Object.entries(obj)) {
 
 ---
 
-## ✅ `hasOwnProperty()` を使った安全な反復
+## 7. `hasOwnProperty()` を使った安全な反復
 
 継承されたプロパティをスキップすることで、意図しないバグを防げます。
 
@@ -119,7 +119,7 @@ for (let key in obj) {
 
 ---
 
-## ✅ 応用：ネストされたオブジェクトの反復
+## 8. 応用：ネストされたオブジェクトの反復
 
 ```javascript
 const product = {
@@ -138,7 +138,7 @@ for (const [key, value] of Object.entries(product.specs)) {
 
 ---
 
-## ✅ 9. 方法の比較と選び方
+##  9. 方法の比較と選び方
 
 | 方法                    | 特徴                                               | 使用場面                      |
 |-------------------------|----------------------------------------------------|-------------------------------|
@@ -150,7 +150,7 @@ for (const [key, value] of Object.entries(product.specs)) {
 
 ---
 
-## ✅ 結論
+## 10. 結論
 
 JavaScriptでは、オブジェクトを反復処理するために多彩な選択肢があります。
 **目的やデータ構造に応じて最適な方法を選択することが重要です。**
