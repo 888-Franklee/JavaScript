@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カレンダーアプリ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+    .day, .header {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .header {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+    .today {
+      background-color: #ffd700;
+    }
+    .controls {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📅 カレンダー</h1>
+  <div class="controls">
+    <button onclick="changeMonth(-1)">← 前月</button>
+    <span id="monthYear"></span>
+    <button onclick="changeMonth(1)">次月 →</button>
+  </div>
+  <div class="calendar" id="calendar"></div>
+
+  <script>
+    const calendarEl = document.getElementById('calendar');
+    const monthYearEl = document.getElementById('monthYear');
+    let currentDate = new Date();
+
+    function renderCalendar(date) {
+      calendarEl.innerHTML = '';
+
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDay = firstDay.getDay();
+
+      const today = new Date();
+      const isTodayMonth = today.getFullYear() === year && today.getMonth() === month;
+
+      const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+      for (let d of dayNames) {
+        const header = document.createElement('div');
+        header.className = 'header';
+        header.textContent = d;
+        calendarEl.appendChild(header);
+      }
+
+      for (let i = 0; i < startDay; i++) {
+        const empty = document.createElement('div');
+        calendarEl.appendChild(empty);
+      }
+
+      for (let d = 1; d <= lastDay.getDate(); d++) {
+        const dayEl = document.createElement('div');
+        dayEl.className = 'day';
+        dayEl.textContent = d;
+        if (isTodayMonth && d === today.getDate()) {
+          dayEl.classList.add('today');
+        }
+        calendarEl.appendChild(dayEl);
+      }
+
+      monthYearEl.textContent = `${year}年 ${month + 1}月`;
+    }
+
+    function changeMonth(offset) {
+      currentDate.setMonth(currentDate.getMonth() + offset);
+      renderCalendar(currentDate);
+    }
+
+    renderCalendar(currentDate);
+  </script>
+</body>
+</html>
