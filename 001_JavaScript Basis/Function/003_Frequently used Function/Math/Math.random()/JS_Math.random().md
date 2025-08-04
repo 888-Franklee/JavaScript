@@ -5,7 +5,7 @@
 
 ---
 
-## ✅ 基本構文
+## 1. 基本構文
 
 ```
 Math.random()
@@ -16,7 +16,7 @@ Math.random()
 
 ---
 
-## ✅ 使用例
+## 2. 使用例
 
 ###  単純なランダム値の出力
 
@@ -54,7 +54,7 @@ console.log(getRandomInt(5, 15));
 
 ---
 
-## ✅ 補足情報
+## 3. 補足情報
 
 ###  小数の範囲でランダム値を生成する
 
@@ -78,14 +78,14 @@ console.log(randomFruit);
 
 ---
 
-## ✅ 注意点
+## 4. 注意点
 
 - `Math.random()` は「擬似乱数」であり、完全に予測不能なランダムではありません。
 - セキュリティ用途（パスワード生成など）では `crypto.getRandomValues()` を使いましょう。
 
 ---
 
-## ✅ 参考リンク
+## 5. 参考リンク
 
 - [MDN Web Docs - Math.random() (日本語)](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
 - [JavaScript公式仕様（ECMAScript）](https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-math.random)
