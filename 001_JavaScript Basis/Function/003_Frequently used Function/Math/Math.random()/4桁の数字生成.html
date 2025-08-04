@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>4桁の数字生成</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    #number {
+      font-size: 2em;
+      margin-top: 20px;
+      color: #007acc;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>4桁の数字生成器</h1>
+  <button onclick="showNumber()">数字を生成</button>
+  <div id="number">----</div>
+
+  <script>
+    function generateStrictFourDigitNumber() {
+      return Math.floor(1000 + Math.random() * 9000); 
+    }
+
+    function showNumber() {
+      const number = generateStrictFourDigitNumber();
+      document.getElementById("number").textContent = number;
+    }
+  </script>
+
+</body>
+</html>
